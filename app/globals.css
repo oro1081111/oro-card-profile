@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #07111f;
+  color: #f8fafc;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-perspective {
+  perspective: 1400px;
+}
+
+.flip-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.flip-card-inner[data-flipped="true"] {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.admin-field {
+  @apply w-full rounded-lg border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20;
+}
+
+.admin-label {
+  @apply text-xs font-medium text-slate-300;
+}
+
+.admin-button {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-cyan-300 hover:text-white disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.admin-button-primary {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-50;
+}

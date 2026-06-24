@@ -1,0 +1,145 @@
+import { ExternalLink, Info } from "lucide-react";
+import type { ProfileCard, Theme } from "@/types/content";
+
+type FlipCardProps = {
+  card: ProfileCard;
+  theme: Theme;
+  flipped: boolean;
+  onToggle: () => void;
+  onOpenDetail: () => void;
+};
+
+export function FlipCard({
+  card,
+  theme,
+  flipped,
+  onToggle,
+  onOpenDetail
+}: FlipCardProps) {
+  const activeButtons = card.buttons.filter((button) => button.target.trim());
+
+  return (
+    <article className="card-perspective mx-auto w-[86%] max-w-[320px]">
+      <div
+        className="flip-card-inner relative aspect-[63/88] w-full"
+        data-flipped={flipped}
+      >
+        <button
+          type="button"
+          aria-label={`${card.title} 卡牌正面`}
+          onClick={onToggle}
+          className="card-face absolute inset-0 flex w-full flex-col overflow-hidden rounded-[24px] border p-4 text-left shadow-card outline-none focus:ring-2 focus:ring-cyan-300"
+          style={{
+            backgroundColor: card.frontColor,
+            borderColor: `${card.accentColor}88`,
+            color: card.textColor,
+            borderRadius: theme.cardRadius,
+            boxShadow: theme.cardShadow ? undefined : "none"
+          }}
+        >
+          <div className="flex items-center justify-between gap-3">
+            <span
+              className="rounded-full px-3 py-1 text-xs font-black text-slate-950"
+              style={{ backgroundColor: card.accentColor }}
+            >
+              #{String(card.order).padStart(2, "0")}
+            </span>
+            <span className="text-xs font-bold text-white/70">點擊翻面</span>
+          </div>
+
+          <div className="mt-6 min-h-28 overflow-hidden rounded-xl border border-white/10 bg-white/[.06]">
+            {card.imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={card.imageUrl}
+                alt={`${card.title} 圖片`}
+                className="h-28 w-full object-cover"
+              />
+            ) : (
+              <div className="grid h-28 place-items-center text-sm font-bold text-white/60">
+                {card.title}
+              </div>
+            )}
+          </div>
+
+          <div className="mt-auto">
+            <h3 className="text-[22px] font-black leading-tight">{card.title}</h3>
+            <p className="mt-2 text-[14px] leading-relaxed text-white/78">
+              {card.subtitle}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {card.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-md border border-white/15 bg-white/10 px-2.5 py-1 text-xs font-bold"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </button>
+
+        <div
+          className="card-face card-back absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border p-4 shadow-card"
+          style={{
+            backgroundColor: card.backColor,
+            borderColor: `${card.accentColor}88`,
+            color: card.textColor,
+            borderRadius: theme.cardRadius,
+            boxShadow: theme.cardShadow ? undefined : "none"
+          }}
+        >
+          <button
+            type="button"
+            onClick={onToggle}
+            className="text-left outline-none focus:ring-2 focus:ring-cyan-300"
+            aria-label={`${card.title} 卡牌背面，點擊翻回正面`}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <span
+                className="rounded-full px-3 py-1 text-xs font-black text-slate-950"
+                style={{ backgroundColor: card.accentColor }}
+              >
+                Back
+              </span>
+              <span className="text-xs font-bold text-white/70">點擊翻回</span>
+            </div>
+            <h3 className="mt-6 text-[22px] font-black leading-tight">
+              {card.title}
+            </h3>
+            <p className="mt-3 text-[14px] leading-6 text-white/82">
+              {card.shortDescription}
+            </p>
+          </button>
+
+          <div className="mt-auto space-y-2.5 pt-5">
+            <button
+              type="button"
+              onClick={onOpenDetail}
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-black text-slate-950 transition active:scale-[.98]"
+            >
+              <Info className="h-4 w-4" aria-hidden="true" />
+              查看詳細介紹
+            </button>
+            {activeButtons
+              .filter((button) => button.type === "link")
+              .slice(0, 2)
+              .map((button) => (
+                <a
+                  key={`${button.label}-${button.target}`}
+                  href={button.target}
+                  target={button.target.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-white/18 px-4 py-3 text-sm font-bold text-white transition active:scale-[.98]"
+                >
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  {button.label}
+                </a>
+              ))}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
