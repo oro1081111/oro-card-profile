@@ -10,24 +10,28 @@ export async function readSiteContentRow(id: "draft" | "published") {
     return null;
   }
 
-  const url = `${supabaseUrl}/rest/v1/site_content?id=eq.${id}&select=content,updated_at,published_at`;
-  const response = await fetch(url, {
-    headers: {
-      apikey: supabaseAnonKey,
-      Authorization: `Bearer ${supabaseAnonKey}`
-    },
-    next: { revalidate: 30 }
-  });
+  try {
+    const url = `${supabaseUrl}/rest/v1/site_content?id=eq.${id}&select=content,updated_at,published_at`;
+    const response = await fetch(url, {
+      headers: {
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${supabaseAnonKey}`
+      },
+      next: { revalidate: 30 }
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return null;
+    }
+
+    const rows = (await response.json()) as Array<{
+      content: unknown;
+      updated_at?: string;
+      published_at?: string | null;
+    }>;
+
+    return rows[0] ?? null;
+  } catch {
     return null;
   }
-
-  const rows = (await response.json()) as Array<{
-    content: unknown;
-    updated_at?: string;
-    published_at?: string | null;
-  }>;
-
-  return rows[0] ?? null;
 }
