@@ -47,7 +47,7 @@ export function FlipCard({
             <span className="text-xs font-bold text-white/70">點擊翻面</span>
           </div>
 
-          <div className="mx-auto mt-3 aspect-[4/3] w-[92%] overflow-hidden rounded-2xl border border-white/12 bg-white/[.08] shadow-inner">
+          <div className="mx-auto mt-3 aspect-[4/3] w-[96%] overflow-hidden rounded-2xl border border-white/12 bg-white/[.08] shadow-inner">
             {card.imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
