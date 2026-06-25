@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { ImageField } from "@/components/admin/ImageField";
 import type { CardButton, ProfileCard } from "@/types/content";
@@ -10,6 +11,13 @@ type CardEditorProps = {
 };
 
 export function CardEditor({ card, onChange }: CardEditorProps) {
+  const [tagsInput, setTagsInput] = useState(card.tags.join(", "));
+
+  useEffect(() => {
+    setTagsInput(card.tags.join(", "));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [card.id]);
+
   function updateField<K extends keyof ProfileCard>(key: K, value: ProfileCard[K]) {
     onChange({ ...card, [key]: value });
   }
@@ -75,16 +83,15 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
         <span className="admin-label">tags，使用逗號分隔</span>
         <input
           className="admin-field"
-          value={card.tags.join(",")}
-          onChange={(event) =>
+          value={tagsInput}
+          onChange={(event) => {
+            const raw = event.target.value;
+            setTagsInput(raw);
             updateField(
               "tags",
-              event.target.value
-                .split(",")
-                .map((tag) => tag.trim())
-                .filter(Boolean)
-            )
-          }
+              raw.split(",").map((tag) => tag.trim()).filter(Boolean)
+            );
+          }}
         />
       </label>
 
@@ -118,15 +125,6 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
           onChange={(event) =>
             updateField("shortDescription", event.target.value)
           }
-        />
-      </label>
-
-      <label className="block space-y-2">
-        <span className="admin-label">detail</span>
-        <textarea
-          className="admin-field min-h-36"
-          value={card.detail}
-          onChange={(event) => updateField("detail", event.target.value)}
         />
       </label>
 
