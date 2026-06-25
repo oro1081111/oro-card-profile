@@ -24,9 +24,10 @@ npm install
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SECRET_KEY=
 ```
 
-初版不需要把 service role key 放進專案。後台操作透過 Supabase Auth 搭配 RLS 控制權限。
+`SUPABASE_SECRET_KEY` 只放在本機 `.env.local` 與 Vercel 後端環境變數，不要加上 `NEXT_PUBLIC_`，也不要提交到 GitHub。
 
 ## 啟動本機開發
 
@@ -59,7 +60,7 @@ npm run dev
 - `site_admins`：管理員 email 白名單
 - `updated_at` trigger
 - RLS policies
-- `profile-assets` Storage bucket 與基本權限
+- `profile-assets` Storage bucket
 - 初始 seed 內容
 
 ## 新增管理員
@@ -117,6 +118,8 @@ profile-assets
 
 用途包含頭像、卡牌圖片、背景圖與作品圖片。上傳後系統會自動把 public URL 填回欄位，請記得按「儲存草稿」，確認後再發布。
 
+圖片上傳會透過 `/api/admin/upload-image` 檢查登入者是否在 `site_admins`，再由後端寫入 Storage。Vercel 必須設定 `SUPABASE_SECRET_KEY` 才能使用手機上傳。
+
 ## 部署到 Vercel
 
 1. 將專案推到 GitHub。
@@ -126,6 +129,7 @@ profile-assets
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SECRET_KEY=
 ```
 
 4. 部署後，到 `/admin/login` 登入並編輯內容。

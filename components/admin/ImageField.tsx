@@ -11,15 +11,6 @@ type ImageFieldProps = {
   folder?: "avatars" | "cards" | "misc";
 };
 
-function extensionFromFile(file: File) {
-  const fromName = file.name.split(".").pop()?.toLowerCase();
-  if (fromName && /^[a-z0-9]+$/.test(fromName)) {
-    return fromName;
-  }
-
-  return file.type.split("/").pop() || "jpg";
-}
-
 export function ImageField({
   label,
   value,
@@ -44,27 +35,39 @@ export function ImageField({
     }
 
     setUploading(true);
-    const ext = extensionFromFile(file);
-    const path = `${folder}/${crypto.randomUUID()}.${ext}`;
-    const { error } = await supabase.storage
-      .from("profile-assets")
-      .upload(path, file, {
-        cacheControl: "3600",
-        contentType: file.type,
-        upsert: false
-      });
+    const { data: sessionData, error: sessionError } =
+      await supabase.auth.getSession();
 
-    if (error) {
+    if (sessionError || !sessionData.session?.access_token) {
       setUploading(false);
-      setMessage(`上傳失敗：${error.message}`);
+      setMessage("登入狀態已過期，請重新登入後再上傳。");
       return;
     }
 
-    const { data } = supabase.storage
-      .from("profile-assets")
-      .getPublicUrl(path);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", folder);
 
-    onChange(data.publicUrl);
+    const response = await fetch("/api/admin/upload-image", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${sessionData.session.access_token}`
+      },
+      body: formData
+    });
+
+    const result = (await response.json()) as {
+      publicUrl?: string;
+      error?: string;
+    };
+
+    if (!response.ok || !result.publicUrl) {
+      setUploading(false);
+      setMessage(result.error || "上傳失敗，請稍後再試。");
+      return;
+    }
+
+    onChange(result.publicUrl);
     setUploading(false);
     setMessage("圖片已上傳，記得儲存草稿。");
   }
@@ -104,7 +107,7 @@ export function ImageField({
           />
         </label>
         <span className="text-xs leading-5 text-slate-400">
-          也可直接貼圖片 URL。上傳需登入管理員，並已建立 `profile-assets` bucket。
+          也可直接貼圖片 URL。上傳需登入管理員。
         </span>
       </div>
 
