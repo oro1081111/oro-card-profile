@@ -55,9 +55,9 @@ export const defaultContent: SiteContent = {
       subtitle: "把概念變成能被玩懂的系統",
       imageUrl: "",
       tags: ["桌遊設計", "規則設計", "原創作品"],
-      frontColor: "#EA580C",
-      backColor: "#C2410C",
-      accentColor: "#FED7AA",
+      frontColor: "#0F766E",
+      backColor: "#0E7490",
+      accentColor: "#99F6E4",
       textColor: "#FFFFFF",
       shortDescription:
         "以規則、回饋與玩家選擇為核心，設計能被理解、願意重玩的互動體驗。",

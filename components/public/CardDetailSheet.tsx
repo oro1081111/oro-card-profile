@@ -61,7 +61,7 @@ export function CardDetailSheet({ card, onClose }: CardDetailSheetProps) {
         </div>
 
         {card.imageUrl ? (
-          <div className="mx-auto mb-5 aspect-[3/4] w-[58%] overflow-hidden rounded-2xl border border-white/12 bg-white/[.06]">
+          <div className="mx-auto mb-5 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/12 bg-white/[.06]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={card.imageUrl}

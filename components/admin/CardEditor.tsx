@@ -63,7 +63,7 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
         label="卡牌圖片 URL"
         value={card.imageUrl ?? ""}
         folder="cards"
-        cropAspect={3 / 4}
+        cropAspect={4 / 3}
         onChange={(value) => updateField("imageUrl", value)}
       />
 

@@ -25,7 +25,7 @@ export function ImageField({
   const [message, setMessage] = useState("");
   const [cropFile, setCropFile] = useState<File | null>(null);
 
-  const resolvedAspect = cropAspect ?? (folder === "avatars" ? 1 : 3 / 4);
+  const resolvedAspect = cropAspect ?? (folder === "avatars" ? 1 : 4 / 3);
 
   async function uploadImage(file: File) {
     setMessage("");
@@ -202,7 +202,8 @@ function ImageCropperDialog({
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState<Offset>({ x: 0, y: 0 });
   const [processing, setProcessing] = useState(false);
-  const ratioText = aspect === 1 ? "1:1" : "3:4";
+  const ratioText =
+    aspect === 1 ? "1:1" : aspect > 1 ? "4:3" : "3:4";
 
   useEffect(() => {
     const url = URL.createObjectURL(file);
