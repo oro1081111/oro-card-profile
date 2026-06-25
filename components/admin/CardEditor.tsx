@@ -149,7 +149,7 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
 
         {card.buttons.map((button, index) => (
           <div
-            key={`${button.label}-${index}`}
+            key={index}
             className="grid gap-3 rounded-lg border border-white/10 bg-slate-900/70 p-3 md:grid-cols-[1fr_1.8fr_auto]"
           >
             <input
