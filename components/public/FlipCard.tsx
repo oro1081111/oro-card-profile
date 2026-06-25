@@ -19,7 +19,7 @@ export function FlipCard({
   const activeButtons = card.buttons.filter((button) => button.target.trim());
 
   return (
-    <article className="card-perspective mx-auto w-[86%] max-w-[320px]">
+    <article className="card-perspective mx-auto w-[82%] max-w-[300px]">
       <div
         className="flip-card-inner relative aspect-[63/88] w-full"
         data-flipped={flipped}
@@ -47,31 +47,31 @@ export function FlipCard({
             <span className="text-xs font-bold text-white/70">點擊翻面</span>
           </div>
 
-          <div className="mt-6 min-h-28 overflow-hidden rounded-xl border border-white/10 bg-white/[.06]">
+          <div className="mx-auto mt-4 aspect-[3/4] w-[58%] overflow-hidden rounded-2xl border border-white/12 bg-white/[.08] shadow-inner">
             {card.imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={card.imageUrl}
                 alt={`${card.title} 圖片`}
-                className="h-28 w-full object-cover"
+                className="h-full w-full object-cover"
               />
             ) : (
-              <div className="grid h-28 place-items-center text-sm font-bold text-white/60">
+              <div className="grid h-full place-items-center px-3 text-center text-sm font-bold text-white/65">
                 {card.title}
               </div>
             )}
           </div>
 
           <div className="mt-auto">
-            <h3 className="text-[22px] font-black leading-tight">{card.title}</h3>
-            <p className="mt-2 text-[14px] leading-relaxed text-white/78">
+            <h3 className="text-[21px] font-black leading-tight">{card.title}</h3>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-white/82">
               {card.subtitle}
             </p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               {card.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-white/15 bg-white/10 px-2.5 py-1 text-xs font-bold"
+                  className="rounded-md border border-white/16 bg-white/12 px-2.5 py-1 text-[11px] font-bold"
                 >
                   {tag}
                 </span>
@@ -105,10 +105,10 @@ export function FlipCard({
               </span>
               <span className="text-xs font-bold text-white/70">點擊翻回</span>
             </div>
-            <h3 className="mt-6 text-[22px] font-black leading-tight">
+            <h3 className="mt-5 text-[21px] font-black leading-tight">
               {card.title}
             </h3>
-            <p className="mt-3 text-[14px] leading-6 text-white/82">
+            <p className="mt-3 text-[14px] leading-6 text-white/86">
               {card.shortDescription}
             </p>
           </button>

@@ -61,12 +61,14 @@ export function CardDetailSheet({ card, onClose }: CardDetailSheetProps) {
         </div>
 
         {card.imageUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={card.imageUrl}
-            alt={`${card.title} 詳細圖片`}
-            className="mb-5 h-48 w-full rounded-xl object-cover"
-          />
+          <div className="mx-auto mb-5 aspect-[3/4] w-[58%] overflow-hidden rounded-2xl border border-white/12 bg-white/[.06]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={card.imageUrl}
+              alt={`${card.title} 詳細圖片`}
+              className="h-full w-full object-cover"
+            />
+          </div>
         ) : null}
 
         <div className="mb-5 flex flex-wrap gap-2">

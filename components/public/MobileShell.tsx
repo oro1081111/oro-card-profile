@@ -18,11 +18,11 @@ export function MobileShell({
       className="min-h-screen px-4 py-5"
       style={{
         background:
-          `linear-gradient(180deg, ${theme.backgroundColor} 0%, #111827 48%, #07111f 100%)`,
+          `radial-gradient(circle at top, ${theme.primaryColor}30 0%, transparent 30%), linear-gradient(180deg, ${theme.backgroundColor} 0%, #172033 52%, #07111f 100%)`,
         color: theme.textColor
       }}
     >
-      <div className="mx-auto flex min-h-[calc(100vh-40px)] w-full max-w-[430px] flex-col gap-8">
+      <div className="mx-auto flex min-h-[calc(100vh-40px)] w-full max-w-[430px] flex-col gap-7">
         {previewLabel ? (
           <div className="sticky top-3 z-30 mx-auto rounded-full border border-cyan-300/50 bg-slate-950/90 px-4 py-2 text-xs font-bold text-cyan-100 shadow-glow backdrop-blur">
             {previewLabel}

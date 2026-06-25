@@ -92,6 +92,7 @@ export function ProfileEditor({ profile, onChange }: ProfileEditorProps) {
         label="頭像圖片 URL"
         value={profile.avatarUrl ?? ""}
         folder="avatars"
+        cropAspect={1}
         onChange={(value) => updateField("avatarUrl", value)}
       />
 

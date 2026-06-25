@@ -10,8 +10,8 @@ export function HeroSection({ profile, theme }: HeroSectionProps) {
   const email = profile.links.find((link) => link.type === "email" && link.url);
 
   return (
-    <section className="pt-8">
-      <div className="flex items-center gap-4">
+    <section className="pt-7">
+      <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[.045] p-3">
         <div
           className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-2xl border bg-slate-900 shadow-glow"
           style={{ borderColor: `${theme.accentColor}88` }}
@@ -42,11 +42,11 @@ export function HeroSection({ profile, theme }: HeroSectionProps) {
         </div>
       </div>
 
-      <div className="mt-7 space-y-4">
+      <div className="mt-6 space-y-4">
         <p className="text-lg font-bold leading-snug text-white">
           {profile.headline}
         </p>
-        <p className="rounded-lg border border-white/10 bg-white/[.04] px-4 py-3 text-[15px] leading-relaxed text-slate-100">
+        <p className="rounded-xl border border-white/10 bg-white/[.055] px-4 py-3 text-[15px] leading-relaxed text-slate-100">
           {profile.subheadline}
         </p>
         <p className="text-[15px] leading-7 text-slate-300">{profile.shortBio}</p>
