@@ -108,7 +108,7 @@ export function FlipCard({
             <h3 className="mt-5 text-[21px] font-black leading-tight">
               {card.title}
             </h3>
-            <p className="mt-3 text-[14px] leading-6 text-white/86">
+            <p className="mt-3 whitespace-pre-wrap text-[14px] leading-6 text-white/86">
               {card.shortDescription}
             </p>
           </button>

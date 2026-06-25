@@ -120,7 +120,7 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
       <label className="block space-y-2">
         <span className="admin-label">shortDescription</span>
         <textarea
-          className="admin-field min-h-24"
+          className="admin-field min-h-48"
           value={card.shortDescription}
           onChange={(event) =>
             updateField("shortDescription", event.target.value)
