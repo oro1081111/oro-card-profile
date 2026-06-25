@@ -80,8 +80,11 @@ export function FlipCard({
           </div>
         </button>
 
-        <div
-          className="card-face card-back absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border p-4 shadow-card"
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-label={`${card.title} 卡牌背面，點擊翻回正面`}
+          className="card-face card-back absolute inset-0 flex w-full flex-col overflow-hidden rounded-[24px] border p-4 text-left shadow-card outline-none focus:ring-2 focus:ring-cyan-300"
           style={{
             backgroundColor: card.frontColor,
             borderColor: `${card.accentColor}88`,
@@ -90,30 +93,23 @@ export function FlipCard({
             boxShadow: theme.cardShadow ? undefined : "none"
           }}
         >
-          <button
-            type="button"
-            onClick={onToggle}
-            className="text-left outline-none focus:ring-2 focus:ring-cyan-300"
-            aria-label={`${card.title} 卡牌背面，點擊翻回正面`}
-          >
-            <div className="flex items-center justify-between gap-3">
-              <span
-                className="rounded-full px-3 py-1 text-xs font-black text-slate-950"
-                style={{ backgroundColor: card.accentColor }}
-              >
-                Back
-              </span>
-              <span className="text-xs font-bold text-white/70">點擊翻回</span>
-            </div>
-            <h3 className="mt-5 text-[21px] font-black leading-tight">
-              {card.title}
-            </h3>
-            <p className="mt-3 whitespace-pre-wrap text-[14px] leading-6 text-white/86">
-              {card.shortDescription}
-            </p>
-          </button>
+          <div className="flex items-center justify-between gap-3">
+            <span
+              className="rounded-full px-3 py-1 text-xs font-black text-slate-950"
+              style={{ backgroundColor: card.accentColor }}
+            >
+              Back
+            </span>
+            <span className="text-xs font-bold text-white/70">點擊翻回</span>
+          </div>
+          <h3 className="mt-5 text-[21px] font-black leading-tight">
+            {card.title}
+          </h3>
+          <p className="mt-3 whitespace-pre-wrap text-[14px] leading-6 text-white/86">
+            {card.shortDescription}
+          </p>
 
-          <div className="mt-auto space-y-2.5 pt-5">
+          <div className="mt-auto space-y-2.5 pt-5" onClick={(e) => e.stopPropagation()}>
             {activeButtons.length ? (
               activeButtons.slice(0, 3).map((button) => (
                 <a
@@ -133,7 +129,7 @@ export function FlipCard({
               </p>
             )}
           </div>
-        </div>
+        </button>
       </div>
     </article>
   );
