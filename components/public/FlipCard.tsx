@@ -1,4 +1,4 @@
-import { ExternalLink, Info } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import type { ProfileCard, Theme } from "@/types/content";
 
 type FlipCardProps = {
@@ -6,17 +6,17 @@ type FlipCardProps = {
   theme: Theme;
   flipped: boolean;
   onToggle: () => void;
-  onOpenDetail: () => void;
 };
 
 export function FlipCard({
   card,
   theme,
   flipped,
-  onToggle,
-  onOpenDetail
+  onToggle
 }: FlipCardProps) {
-  const activeButtons = card.buttons.filter((button) => button.target.trim());
+  const activeButtons = card.buttons.filter(
+    (button) => button.type === "link" && button.target.trim()
+  );
 
   return (
     <article className="card-perspective mx-auto w-[82%] max-w-[300px]">
@@ -83,7 +83,7 @@ export function FlipCard({
         <div
           className="card-face card-back absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border p-4 shadow-card"
           style={{
-            backgroundColor: card.backColor,
+            backgroundColor: card.frontColor,
             borderColor: `${card.accentColor}88`,
             color: card.textColor,
             borderRadius: theme.cardRadius,
@@ -114,18 +114,8 @@ export function FlipCard({
           </button>
 
           <div className="mt-auto space-y-2.5 pt-5">
-            <button
-              type="button"
-              onClick={onOpenDetail}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-black text-slate-950 transition active:scale-[.98]"
-            >
-              <Info className="h-4 w-4" aria-hidden="true" />
-              查看詳細介紹
-            </button>
-            {activeButtons
-              .filter((button) => button.type === "link")
-              .slice(0, 2)
-              .map((button) => (
+            {activeButtons.length ? (
+              activeButtons.slice(0, 3).map((button) => (
                 <a
                   key={`${button.label}-${button.target}`}
                   href={button.target}
@@ -136,7 +126,12 @@ export function FlipCard({
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   {button.label}
                 </a>
-              ))}
+              ))
+            ) : (
+              <p className="rounded-lg border border-white/14 bg-white/8 px-4 py-3 text-center text-sm font-bold text-white/72">
+                點擊卡牌可翻回正面
+              </p>
+            )}
           </div>
         </div>
       </div>

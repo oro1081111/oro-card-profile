@@ -56,20 +56,14 @@ export const defaultContent: SiteContent = {
       imageUrl: "",
       tags: ["桌遊設計", "規則設計", "原創作品"],
       frontColor: "#0F766E",
-      backColor: "#0E7490",
+      backColor: "#0F766E",
       accentColor: "#99F6E4",
       textColor: "#FFFFFF",
       shortDescription:
         "以規則、回饋與玩家選擇為核心，設計能被理解、願意重玩的互動體驗。",
       detail:
         "我把桌遊設計視為一種嚴謹的互動設計：玩家要看得懂目標、做得出選擇、感受到回饋，並在每一輪行動中產生新的判斷。這份訓練也延伸到我設計產品流程、AI Agent 與使用者體驗的方式。",
-      buttons: [
-        {
-          label: "查看設計觀點",
-          type: "modal",
-          target: "detail"
-        }
-      ]
+      buttons: []
     },
     {
       id: "ai-product-manager",
@@ -80,7 +74,7 @@ export const defaultContent: SiteContent = {
       imageUrl: "",
       tags: ["AI產品", "B2B", "Agent落地"],
       frontColor: "#2563EB",
-      backColor: "#1D4ED8",
+      backColor: "#2563EB",
       accentColor: "#BFDBFE",
       textColor: "#FFFFFF",
       shortDescription:
@@ -88,11 +82,6 @@ export const defaultContent: SiteContent = {
       detail:
         "我關注的不是單一 AI 功能展示，而是它能不能被放進使用者每天真的會走的流程裡。從需求訪談、情境拆解、功能優先序到導入後回饋，我希望 AI 產品能降低摩擦、提高採用率，並持續創造可被看見的價值。",
       buttons: [
-        {
-          label: "查看 PM 經驗",
-          type: "modal",
-          target: "detail"
-        },
         {
           label: "交流 AI 產品",
           type: "link",
@@ -109,20 +98,14 @@ export const defaultContent: SiteContent = {
       imageUrl: "",
       tags: ["生成式AI", "LLM", "系統整合"],
       frontColor: "#0891B2",
-      backColor: "#0E7490",
+      backColor: "#0891B2",
       accentColor: "#A5F3FC",
       textColor: "#FFFFFF",
       shortDescription:
         "曾任生成式 AI 工程師，熟悉模型應用、資料流程、工具串接與產品化限制。",
       detail:
         "工程背景讓我能用更具體的方式評估 AI 產品：資料從哪裡來、模型能做什麼、限制在哪裡、錯誤如何被處理，以及使用者該如何信任輸出。這讓我在 PM 與工程之間能更精準地轉譯需求。",
-      buttons: [
-        {
-          label: "查看技術背景",
-          type: "modal",
-          target: "detail"
-        }
-      ]
+      buttons: []
     },
     {
       id: "math-graduate-school",
@@ -133,20 +116,14 @@ export const defaultContent: SiteContent = {
       imageUrl: "",
       tags: ["應用數學", "邏輯推理", "問題建模"],
       frontColor: "#16A34A",
-      backColor: "#15803D",
+      backColor: "#16A34A",
       accentColor: "#BBF7D0",
       textColor: "#FFFFFF",
       shortDescription:
         "畢業於國立陽明交通大學應用數學研究所，擅長以結構化方式理解問題。",
       detail:
         "數學訓練讓我習慣先找規則、定義變數、拆出關係，再決定如何行動。無論是 AI 產品、Agent 流程還是桌遊機制，我都會先建立問題的骨架，讓後續設計更清楚、更可驗證。",
-      buttons: [
-        {
-          label: "我的思考方式",
-          type: "modal",
-          target: "detail"
-        }
-      ]
+      buttons: []
     }
   ]
 };

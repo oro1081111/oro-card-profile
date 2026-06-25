@@ -48,16 +48,16 @@ export function CardListEditor({ cards, onChange }: CardListEditorProps) {
       imageUrl: "",
       tags: ["Tag"],
       frontColor: "#111827",
-      backColor: "#1F2937",
+      backColor: "#111827",
       accentColor: "#22D3EE",
       textColor: "#FFFFFF",
       shortDescription: "請輸入簡短介紹。",
       detail: "請輸入詳細介紹。",
       buttons: [
         {
-          label: "查看詳細介紹",
-          type: "modal",
-          target: "detail"
+          label: "前往連結",
+          type: "link",
+          target: ""
         }
       ]
     };

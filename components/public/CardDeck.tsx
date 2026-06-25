@@ -4,7 +4,6 @@ import { useState } from "react";
 import { sortedVisibleCards } from "@/lib/content/utils";
 import type { ProfileCard, Theme } from "@/types/content";
 import { FlipCard } from "@/components/public/FlipCard";
-import { CardDetailSheet } from "@/components/public/CardDetailSheet";
 
 type CardDeckProps = {
   cards: ProfileCard[];
@@ -14,7 +13,6 @@ type CardDeckProps = {
 export function CardDeck({ cards, theme }: CardDeckProps) {
   const visibleCards = sortedVisibleCards(cards);
   const [flippedId, setFlippedId] = useState<string | null>(null);
-  const [detailCard, setDetailCard] = useState<ProfileCard | null>(null);
 
   return (
     <section aria-label="個人卡牌" className="space-y-5">
@@ -38,12 +36,9 @@ export function CardDeck({ cards, theme }: CardDeckProps) {
             onToggle={() =>
               setFlippedId((current) => (current === card.id ? null : card.id))
             }
-            onOpenDetail={() => setDetailCard(card)}
           />
         ))}
       </div>
-
-      <CardDetailSheet card={detailCard} onClose={() => setDetailCard(null)} />
     </section>
   );
 }

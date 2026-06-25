@@ -23,6 +23,10 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
     );
   }
 
+  function updateFrontColor(value: string) {
+    onChange({ ...card, frontColor: value, backColor: value });
+  }
+
   return (
     <div className="space-y-5 rounded-lg border border-white/10 bg-slate-950/50 p-4">
       <div className="flex items-center justify-between gap-3">
@@ -84,10 +88,9 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
         />
       </label>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-3">
         {[
-          ["frontColor", "正面色"],
-          ["backColor", "背面色"],
+          ["frontColor", "正面 / 背面色"],
           ["accentColor", "強調色"],
           ["textColor", "文字色"]
         ].map(([key, label]) => (
@@ -98,7 +101,9 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
               className="h-11 w-full rounded-lg border border-slate-700 bg-slate-900 p-1"
               value={card[key as keyof ProfileCard] as string}
               onChange={(event) =>
-                updateField(key as keyof ProfileCard, event.target.value as never)
+                key === "frontColor"
+                  ? updateFrontColor(event.target.value)
+                  : updateField(key as keyof ProfileCard, event.target.value as never)
               }
             />
           </label>
@@ -127,7 +132,7 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
 
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <h4 className="font-black">按鈕</h4>
+          <h4 className="font-black">跳轉連結按鈕</h4>
           <button
             type="button"
             className="admin-button"
@@ -135,19 +140,19 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
             onClick={() =>
               updateField("buttons", [
                 ...card.buttons,
-                { label: "新按鈕", type: "modal", target: "detail" }
+                { label: "新連結", type: "link", target: "" }
               ])
             }
           >
             <Plus className="h-4 w-4" aria-hidden="true" />
-            新增按鈕
+            新增連結
           </button>
         </div>
 
         {card.buttons.map((button, index) => (
           <div
             key={`${button.label}-${index}`}
-            className="grid gap-3 rounded-lg border border-white/10 bg-slate-900/70 p-3 md:grid-cols-[1fr_130px_1.6fr_auto]"
+            className="grid gap-3 rounded-lg border border-white/10 bg-slate-900/70 p-3 md:grid-cols-[1fr_1.8fr_auto]"
           >
             <input
               className="admin-field"
@@ -157,26 +162,17 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
               }
               placeholder="label"
             />
-            <select
-              className="admin-field"
-              value={button.type}
-              onChange={(event) =>
-                updateButton(index, {
-                  ...button,
-                  type: event.target.value as CardButton["type"]
-                })
-              }
-            >
-              <option value="modal">modal</option>
-              <option value="link">link</option>
-            </select>
             <input
               className="admin-field"
               value={button.target}
               onChange={(event) =>
-                updateButton(index, { ...button, target: event.target.value })
+                updateButton(index, {
+                  ...button,
+                  type: "link",
+                  target: event.target.value
+                })
               }
-              placeholder="detail、mailto: 或 https://"
+              placeholder="mailto: 或 https://"
             />
             <button
               type="button"
