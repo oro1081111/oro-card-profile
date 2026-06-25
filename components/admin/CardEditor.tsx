@@ -62,6 +62,7 @@ export function CardEditor({ card, onChange }: CardEditorProps) {
       <ImageField
         label="卡牌圖片 URL"
         value={card.imageUrl ?? ""}
+        folder="cards"
         onChange={(value) => updateField("imageUrl", value)}
       />
 

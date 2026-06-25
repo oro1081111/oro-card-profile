@@ -91,6 +91,7 @@ export function ProfileEditor({ profile, onChange }: ProfileEditorProps) {
       <ImageField
         label="頭像圖片 URL"
         value={profile.avatarUrl ?? ""}
+        folder="avatars"
         onChange={(value) => updateField("avatarUrl", value)}
       />
 

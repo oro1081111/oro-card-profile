@@ -106,13 +106,16 @@ on conflict (email) do nothing;
 
 ## 圖片與 Storage
 
-第一版後台支援直接輸入圖片 URL。Supabase Storage 已預留 bucket：
+後台支援兩種圖片設定方式：
+
+- 直接輸入圖片 URL
+- 從手機或電腦選擇圖片，上傳到 Supabase Storage
 
 ```text
 profile-assets
 ```
 
-用途包含頭像、卡牌圖片、背景圖與作品圖片。未來可以在 `components/admin/ImageField.tsx` 接入上傳流程。
+用途包含頭像、卡牌圖片、背景圖與作品圖片。上傳後系統會自動把 public URL 填回欄位，請記得按「儲存草稿」，確認後再發布。
 
 ## 部署到 Vercel
 
